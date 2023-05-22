@@ -55,9 +55,11 @@ where $N^{(1)}, N^{(2)}$ are the number of elements in $\mathbf{p}^{(1)}, \mathb
 And $w_o, w_d$ are weight for the operation and Euclidean distance, respectively, satisfying
 
 ```math
-w_o + w_d = 1 .
+w_o + w_d = 1\ .
 ```
 
+Since ${\rm argmin}_j |p_i^{(1)} - p_j^{(2)}|$ is an expression that returns the index $j$ of $\mathbf{p}^{(2)}$ closest to point $p_i^{(1)}$, 
+the content of the $\sum$ of the second term represents the distance to the $p_j^{(2)}$ closest to $p_i^{(1)}$ in the sense of Euclidean distance.
 ### Case of `valuedLocated` class
 In case of `valuedLocated` class, calculate the "distance" according to the following formula:
 
@@ -66,10 +68,11 @@ D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) = w_o |N^{(1)} - N^{(2)}| + w_d \sum_{i=0}
 ```
 
 As for $N^{(1)}, N^{(2)}$ and $\mathbf{p}^{(1)}, \mathbf{p}^{(2)}$, it is the same as in the section above.
+The difference from the above section is the $v^{(1)}, v^{(2)}$, which represents the value the element $\mathbf{p}^{(1)}, \mathbf{p}^{(2)}$ has, respectively.
 And $w_o, w_d, w_v$ are weight for the operation, Euclidean distance and values, respectively, satisfying
 
 ```math
-w_o + w_d + w_v = 1 .
+w_o + w_d + w_v = 1\ .
 ```
 
 ### Distance from empty population
