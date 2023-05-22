@@ -13,7 +13,7 @@ class MeasuringParam:
         self.operation_weight = 1 - distance_weight - value_weight
 
 
-def measure(pop1: list[Located], pop2: list[Located], param: MeasuringParam) -> float:
+def measure(pop1: list[Located], pop2: list[Located], param: MeasuringParam | None = None) -> float:
     if len(pop1) == 0 and len(pop2) == 0:
         return 0
     elif len(pop1) <= len(pop2):
@@ -23,13 +23,20 @@ def measure(pop1: list[Located], pop2: list[Located], param: MeasuringParam) -> 
         smaller = pop2
         larger = pop1
 
+    is_valued = isinstance(larger[0], ValuedLocated)
+    if param is None:
+        if is_valued:
+            param = MeasuringParam(1/3, 1/3)
+        else:
+            param = MeasuringParam(0.5, 0.0)
+
     if len(smaller) == 0:
         return _measure_from_o(larger, param)
 
     loc_dist = _measure_location_dist(smaller, larger)
     ope_dist = len(larger) - len(smaller)
 
-    if isinstance(larger[0], ValuedLocated):
+    if is_valued:
         val_dist = _measure_value_dist(smaller, larger)
     else:
         val_dist = 0
