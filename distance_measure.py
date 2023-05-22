@@ -97,34 +97,3 @@ def _find_proximal(dist_matrix: np.ndarray) -> np.ndarray:
         dist_matrix[:, min_col] = max_val
 
     return proximal_distance
-
-
-if __name__ == "__main__":
-    class Sample1D(Located):
-        def __init__(self, loc: float):
-            self.loc = loc
-
-        def get_location(self) -> np.ndarray | float:
-            return self.loc
-
-        def __repr__(self) -> str:
-            return f"Sample1D({self.loc:.4f})"
-
-
-    class Sample2D(Located):
-        def __init__(self, x: float, y: float):
-            self.x = x
-            self.y = y
-
-        def get_location(self) -> np.ndarray | float:
-            return np.array([self.x, self.y], dtype=np.float64)
-
-        def __repr__(self) -> str:
-            return f"Sample2D({self.x:.4f}, {self.y:.4f})"
-
-
-    _pop1 = [Sample2D(*x) for x in np.random.random((354, 2))]
-    _pop2 = [Sample2D(*x) for x in np.random.random((213, 2))]
-
-    dist = measure(_pop1, _pop2, MeasuringParam(0.5))
-    print(dist)
