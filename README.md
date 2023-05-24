@@ -83,9 +83,9 @@ D_\emptyset(\mathbf{p}) = w_o N + w_d \sum_{i=0}^{N} |p_i|_{L2} + w_v \sum_{i=0}
 ### Example
 The process of calculating the distance in [#Usage](Usage) described above is as follows:
 ```math
-D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) &= w_o |N^{(1)} - N^{(2)}| + w_d \sum_{i=0}^{N^{(1)}} |p_{i}^{(1)} - p_{{\rm argmin}_j |p_i^{(1)} - p_j^{(2)}|}^{(2)}|_{L2}
-&= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin}_j |p_0^{(1)} - p_j^{(2)}|}^{(2)}|_{L2} \\
-&= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin} (|2 - (-0.3)|,\ |2-3|)}^{(2)}| \\
-&= \frac{1}{2} |1-2| + \frac{1}{2} |2 - 3| \\
-&= 1
+D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) = w_o |N^{(1)} - N^{(2)}| + w_d \sum_{i=0}^{N^{(1)}} |p_{i}^{(1)} - p_{{\rm argmin}_j |p_i^{(1)} - p_j^{(2)}|}^{(2)}|_{L2}
+= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin}_j |p_0^{(1)} - p_j^{(2)}|}^{(2)}|_{L2} \\
+= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin} (|2 - (-0.3)|,\ |2-3|)}^{(2)}| \\
+= \frac{1}{2} |1-2| + \frac{1}{2} |2 - 3| \\
+= 1
 ```
