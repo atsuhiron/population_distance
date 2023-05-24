@@ -8,8 +8,6 @@ Calculate distance between two populations.
 ## Usage
 Make the target class inherit from `base.Located` or `base.ValuedLocated` and assign it to the `distance_measure.measure()` function.
 ```python
-import numpy as np
-
 import base
 import distance_measure
 
@@ -37,7 +35,7 @@ Specifically, the following three items are considered
 1. Euclidean distance of corresponding elements  
 1. Difference in the values of the corresponding elements (always 0 in the case of the `Located` class)
 
-Since the axiom of distance is satisfied, the two elements are commutative.
+Since the axiom of distance is satisfied, the two populations are commutative.
 
 ```math
 D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) = D(\mathbf{p}^{(2)}, \mathbf{p}^{(1)})
