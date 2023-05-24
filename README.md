@@ -15,7 +15,7 @@ class Point(base.Located):
     def __init__(self, x: float):
         self.x = x
     
-    def get_location(self) -> np.ndarray | float:
+    def get_location(self) -> float:
         return self.x
 
 
