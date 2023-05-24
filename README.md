@@ -65,7 +65,7 @@ In case of `valuedLocated` class, calculate the "distance" according to the foll
 D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) = w_o |N^{(1)} - N^{(2)}| + w_d \sum_{i=0}^{N^{(1)}} |p_{i}^{(1)} - p_{{\rm argmin}_j |p_i^{(1)} - p_j^{(2)}|  + |v_i^{(1)} - v_j^{(2)}|}^{(2)}|_{L2} +  w_v \sum_{i=0}^{N^{(1)}} |v_{i}^{(1)} - v_{{\rm argmin}_j |p_i^{(1)} - p_j^{(2)}|  + |v_i^{(1)} - v_j^{(2)}|}^{(2)}|
 ```
 
-As for $N^{(1)}, N^{(2)}$ and $\bm{p}^{(1)}, \mathbf{p}^{(2)}$, it is the same as in the section above.
+As for $N^{(1)}, N^{(2)}$ and $\mathbf{p}^{(1)}, \mathbf{p}^{(2)}$, it is the same as in the section above.
 The difference from the above section is the $v^{(1)}, v^{(2)}$, which represents the value the element $\mathbf{p}^{(1)}, \mathbf{p}^{(2)}$ has, respectively.
 And $w_o, w_d, w_v$ are weight for the operation, Euclidean distance and values, respectively, satisfying
 
