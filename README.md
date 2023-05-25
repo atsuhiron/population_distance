@@ -29,9 +29,9 @@ print(dist)
 ```
 
 ## Mathematics
-The distance is calculated based on the number of operations that match two sets. 
+The distance is calculated based on the number of operations that match two populations. 
 Specifically, the following three items are considered  
-1. Difference in the number of elements  
+1. Difference in the number of elements (the number of operation to remove element from larger population)  
 1. Euclidean distance of corresponding elements  
 1. Difference in the values of the corresponding elements (always 0 in the case of the `Located` class)
 
@@ -50,7 +50,7 @@ D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) = w_o |N^{(1)} - N^{(2)}| + w_d \sum_{i=0}
 ```
 
 where $N^{(1)}, N^{(2)}$ are the number of elements in $\mathbf{p}^{(1)}, \mathbf{p}^{(2)}$ respectively, satisfying $N^{(1)} \leq N^{(2)}$.
-And $w_o, w_d$ are weight for the operation and Euclidean distance, respectively, satisfying
+And $w_o, w_d$ are weight for the removing operation and Euclidean distance, respectively, satisfying
 
 ```math
 w_o + w_d = 1\ .
@@ -67,7 +67,7 @@ D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) = w_o |N^{(1)} - N^{(2)}| + w_d \sum_{i=0}
 
 As for $N^{(1)}, N^{(2)}$ and $\mathbf{p}^{(1)}, \mathbf{p}^{(2)}$, it is the same as in the section above.
 The difference from the above section is the $v^{(1)}, v^{(2)}$, which represents the value the element $\mathbf{p}^{(1)}, \mathbf{p}^{(2)}$ has, respectively.
-And $w_o, w_d, w_v$ are weight for the operation, Euclidean distance and values, respectively, satisfying
+And $w_o, w_d, w_v$ are weight for the removing operation, Euclidean distance and values, respectively, satisfying
 
 ```math
 w_o + w_d + w_v = 1\ .
@@ -86,13 +86,13 @@ The process of calculating the distance in [Usage](#Usage) described above is as
 D(\mathbf{p}^{(1)}, \mathbf{p}^{(2)}) = w_o |N^{(1)} - N^{(2)}| + w_d \sum_{i=0}^{N^{(1)}} |p_{i}^{(1)} - p_{{\rm argmin}_j |p_i^{(1)} - p_j^{(2)}|}^{(2)}|_{L2}
 ```
 ```math
-= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin}_j |p_0^{(1)} - p_j^{(2)}|}^{(2)}|_{L2} \\
+= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin}_j |p_0^{(1)} - p_j^{(2)}|}^{(2)}|_{L2}
 ```
 ```math
-= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin} (|2 - (-0.3)|,\ |2-3|)}^{(2)}| \\
+= \frac{1}{2} |1-2| + \frac{1}{2} |p_{0}^{(1)} - p_{{\rm argmin} (|2 - (-0.3)|,\ |2-3|)}^{(2)}|
 ```
 ```math
-= \frac{1}{2} |1-2| + \frac{1}{2} |2 - 3| \\
+= \frac{1}{2} |1-2| + \frac{1}{2} |2 - 3|
 ```
 ```math
 = 1
