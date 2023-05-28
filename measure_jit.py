@@ -18,18 +18,28 @@ def calc_dist_matrix_2d_jit(loc_larger: np.ndarray, loc_smaller: np.ndarray) -> 
     return np.sqrt(np.sum(np.square(_loc_larger_mat - _loc_smaller_mat), axis=2))
 
 
-@numba.jit("i8[:](f8[:, :])", cache=True, nopython=True)
-def argmin_2d_jit(arr: np.ndarray) -> np.ndarray:
-    cur_min = 1.79769313486231e+308
-    min_row_index = -1
-    min_col_index = -1
-    for irow in range(len(arr)):
-        for icol in range(len(arr[0])):
-            if arr[irow, icol] < cur_min:
-                cur_min = arr[irow, icol]
-                min_row_index = irow
-                min_col_index = icol
-    return np.array([min_row_index, min_col_index], dtype=np.int64)
+@numba.jit("Tuple((i8, f8))(f8[:])", cache=True, nopython=True)
+def argmin_1d_jit(arr: np.ndarray) -> tuple[int, float]:
+    min_val = 1.79769313486231e+308
+    min_idx = -1
+    for i in range(len(arr)):
+        if arr[i] < min_val:
+            min_val = arr[i]
+            min_idx = i
+    return min_idx, min_val
+
+
+@numba.jit("Tuple((i8, i8))(f8[:, :])", cache=True, nopython=True, parallel=True)
+def argmin_2d_jit(arr: np.ndarray) -> tuple[int, int]:
+    row_nums = len(arr)
+    min_col_indices = np.zeros(row_nums, dtype=np.int64)
+    min_values = np.zeros(row_nums, dtype=np.float64)
+    for irow in numba.prange(row_nums):
+        min_col_indices[irow], min_values[irow] = argmin_1d_jit(arr[irow])
+
+    min_idx, min_val = argmin_1d_jit(min_values)
+
+    return min_idx, min_col_indices[min_idx]
 
 
 @numba.jit("f8[:](f8[:, :])", cache=True, nopython=True)
@@ -53,7 +63,6 @@ def find_proximal_jit(dist_matrix: np.ndarray) -> np.ndarray:
     return proximal_distance
 
 
-
 if __name__ == "__main__":
     arr_small = np.random.random((4, 2)).astype(np.float64)
     arr_large = np.random.random((6, 2)).astype(np.float64)
@@ -64,6 +73,9 @@ if __name__ == "__main__":
     print(ret2)
     ret3 = find_proximal_jit(ret2)
     print(ret3)
+
+    argmin_ret_1d = argmin_1d_jit(np.random.random(8))
+    print(argmin_ret_1d)
 
     argmin_ret = argmin_2d_jit(np.random.random((10, 3)))
     print(argmin_ret)
