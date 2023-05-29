@@ -79,4 +79,23 @@ def _measure_value_dist(smaller: list[ValuedLocated], larger: list[ValuedLocated
 def _find_proximal(dist_matrix: np.ndarray) -> np.ndarray:
     assert dist_matrix.ndim == 2, "Only 2-dimensional matrices supported."
     assert len(dist_matrix) >= len(dist_matrix[0]), "Only vertical or square matrices are supported."
-    return measure_jit.find_proximal_jit(dist_matrix)
+    if len(dist_matrix) > 300:
+        # use numba function
+        return measure_jit.find_proximal_jit(dist_matrix)
+
+    max_val = 1.79769313486231e+308
+    h_size = len(dist_matrix[0])
+    proximal_distance = np.zeros(h_size, dtype=np.float64)
+    for _ in range(h_size):
+        # find the most proximal
+        min_index = np.argmin(dist_matrix)
+        min_row = min_index // h_size
+        min_col = min_index % h_size
+
+        # log distance
+        proximal_distance[min_col] = dist_matrix[min_row, min_col]
+
+        # post process
+        dist_matrix[:, min_col] = max_val
+
+    return proximal_distance
